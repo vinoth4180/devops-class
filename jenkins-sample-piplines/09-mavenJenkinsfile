@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    stages {
+        stage('Maven Project') {
+            steps {
+                git credentialsId: 'c56e486a-f547-41ad-add8-933df79c1f4e', url: "git@github.com:VishnuvardhanKrishnan/devops-aug-sep-batch.git", branch: 'maven'
+                sh "git checkout maven"
+                dir('MavenHelloWorldProject') {
+                    sh "mvn clean install"
+                }
+                post {
+                    success {
+                        archiveArtifacts "MavenHelloWorldProject/target/*.jar"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    options{
+        timestamps()
+    }
+    triggers{
+        pollSCM('* * * * *')
+    }
+    stages {
+        stage("Cron Task") {
+            steps {
+                echo "Hey, There!"
+                git url:"git@github.com:VishnuvardhanKrishnan/devops-aug-sep-batch.git"
+            }
+        }
+    }
+}
