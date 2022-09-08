@@ -1,0 +1,22 @@
+<h1>employee List</h1>
+<a href="{% url 'employee_new' %}">Create New employee</a><br><br>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Identity Number</th>
+        <th>Action</th>
+    </tr>
+    {% for employee in object_list %}
+    <tr>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.identityNumber }}</td>
+        <td>
+            <a href="{% url 'employee_detail' employee.id %}">Detail</a>
+            <a href="{% url 'employee_edit' employee.id %}">Edit</a>
+            <a href="{% url 'employee_delete' employee.id %}">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3"><b>Data is empty! Please, add data first.</b></td></tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../django-crud-sqlite/.idea/django-crud-sqlite.iml" filepath="$PROJECT_DIR$/../django-crud-sqlite/.idea/django-crud-sqlite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../employee-Django/.idea/employee-Django.iml" filepath="$PROJECT_DIR$/../employee-Django/.idea/employee-Django.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/operator.iml" filepath="$PROJECT_DIR$/.idea/operator.iml" />
+      <module fileurl="file://D:/python Program/.idea/python Program.iml" filepath="D:/python Program/.idea/python Program.iml" />
+    </modules>
+  </component>
+</project>

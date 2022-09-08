@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List</title>
+</head>
+<body>
+
+<h3>{{msg}} result Information</h3>
+<table border=5>
+    <thead>
+        <td>NUMBER1</td>
+        <td>NUMBER2</td>
+        <td>Result</td>
+    </thead>
+
+    {% for row in rows %}
+
+        <tr>
+            <td>{{row["num1"]}}</td>
+            <td>{{row["num2"]}}</td>
+            <td>{{row["result"]}}</td>
+
+        </tr>
+
+    {% endfor %}
+</table>
+<br><br>
+
+<a href="/">Go back to home page</a>
+
+</body>
+</html>
