@@ -1,0 +1,68 @@
+pipeline {
+    agent any
+    stages {
+        // Install Git & GitHub Plugin
+        stage('Git Push') {
+            steps {
+                cleanWs()
+                git credentialsId: 'github-ssh-key', url: "git@github.com:VishnuvardhanKrishnan/devops-aug-sep-batch.git", branch: 'main'
+                sshagent(credentials: ['github-ssh-key']) {
+                    sh """
+                        echo "Workspace is $WORKSPACE"
+                        git clone git@github.com:VishnuvardhanKrishnan/devops-aug-sep-batch.git
+                        git tag -a tag-${BUILD_NUMBER} -m 'Jenkins-Build-${BUILD_NUMBER}'
+                        git push --tags
+                    """
+                }
+            }
+        }
+        stage('Maven Build using Docker') {
+            agent {
+                docker {
+                    image 'maven:3.8.1-adoptopenjdk-11'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps {
+                git credentialsId: 'github-ssh-key', url: "git@github.com:VishnuvardhanKrishnan/devops-aug-sep-batch.git", branch: 'main'
+                sh "git checkout maven"
+                dir('MavenHelloWorldProject') {
+                    sh "mvn clean install"
+                }
+            }
+        }
+        stage('Maven Test') {
+            steps {
+                git credentialsId: 'github-ssh-key', url: "git@github.com:VishnuvardhanKrishnan/devops-aug-sep-batch.git", branch: 'main'
+                sh "git checkout maven"
+                dir('MavenHelloWorldProject') {
+                    sh "mvn test"
+                }
+            }
+        }
+        stage('Docker App Build') {
+            steps {
+                sh """
+                    git checkout devops
+                    cd docker-sample-project/docker-sample-application/app
+                    docker build -t getting-started .
+                    docker run -d getting-started
+                    docker kill \$(docker ps -q)
+                """
+            }
+        }
+        // Install Ansible Plugin
+        stage("Ansbile plugin") {
+            steps {
+                ansiblePlaybook disableHostKeyChecking: true, installation: 'Ansible', playbook: '/tmp/sample.yml'
+            }
+        }
+        stage("Ansbile Playbook") {
+            steps {
+                sh """
+                    ansible-playbook /tmp/sample.yml
+                """
+            }
+        }
+    }
+}

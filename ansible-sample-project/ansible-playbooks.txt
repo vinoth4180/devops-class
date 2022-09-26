@@ -1,0 +1,41 @@
+Install Ansible on Amazon Linux / CentOS
+===========================================
+# sudo yum install epel-release
+# sudo yum install ansible
+
+## Edit the file /etc/ansible/ansible.cfg and the below entry:
+host_key_checking = False
+
+Adhoc command:
+===============
+Access System Information (Facts) in Ansible Playbooks:
+  ansible all -m setup -u osboxes
+
+Playbook details and execution:
+===============================
+01 - Define Tasks in Ansible Playbooks
+  ansible-playbook 01-playbook.yml
+
+02 - Use Variables in Ansible Playbooks
+  ansible-playbook 02-playbook.yml 
+
+03 - Access System Information (Facts) in Ansible Playbooks
+  ansible all -m setup -a "filter=*ipv4*" 
+
+04 - Use Conditionals in Ansible Playbooks
+  ansible-playbook 04-playbook.yml 
+
+05 - Use Conditionals in Ansible Playbooks using register (dynamic variable)
+  ansible-playbook 05-playbook.yml 
+
+06 - Use Loops in Ansible Playbooks
+  ansible-playbook 06-playbook.yml 
+
+07 - Privilege Escalation in Ansible Playbooks
+  ansible-playbook 07-playbook.yml -u osboxes -K
+
+08 - Update Linux packages
+  ansible-playbook 08-playbook.yml -u root -K
+  
+09 - Install Apache & Using Handlers
+  ansible-playbook 09-playbook.yml
