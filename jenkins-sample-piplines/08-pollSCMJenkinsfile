@@ -10,7 +10,7 @@ pipeline {
         stage("Cron Task") {
             steps {
                 echo "Hey, There!"
-                git url:"git@github.com:VishnuvardhanKrishnan/devops-aug-sep-batch.git"
+                git url:"git@github.com:vinoth4180/devops-class.git"
             }
         }
     }
