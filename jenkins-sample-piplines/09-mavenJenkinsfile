@@ -6,7 +6,7 @@ pipeline {
                 git credentialsId: 'git', url: "git@github.com:vinoth4180/devops-class.git", branch: 'azula'
                 sh "git checkout main"
                 dir('MavenHelloWorldProject') {
-                    sh "mvn clean install"
+                    sh "sudo apt install maven"
                 }
                 post {
                     success {
